@@ -182,9 +182,12 @@ public class DetailLevelManager {
     for( int i = index; i >= 0; i-- ) {
       match = mDetailLevelLinkedList.get( i );
       if( match.getScale() < mScale ) {
-        if( i < index ) {
-          match = mDetailLevelLinkedList.get( i + 1 );
-        }
+        // Changed from original TileView repo. Over-scale the nearest level with lower scale
+        // instead of down-scale the nearest level with greater scale. This creates image
+        // subsampling, but we need it for most maps otherwise things are too small.
+//        if( i < index ) {
+//          match = mDetailLevelLinkedList.get( i + 1 );
+//        }
         break;
       }
     }
